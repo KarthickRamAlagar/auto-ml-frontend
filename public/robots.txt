@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+Disallow: /app
+Disallow: /admin
+Disallow: /report
+Disallow: /login
+
+Sitemap: __SITE_URL__/sitemap.xml

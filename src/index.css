@@ -1,0 +1,165 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 48 33% 97%;
+    --foreground: 30 8% 14%;
+    --card: 48 30% 99%;
+    --card-foreground: 30 8% 14%;
+    --muted: 45 20% 93%;
+    --muted-foreground: 30 6% 40%;
+    --accent: 45 22% 91%;
+    --accent-foreground: 30 8% 14%;
+    --secondary: 45 20% 91%;
+    --secondary-foreground: 30 8% 14%;
+    --border: 45 16% 86%;
+    --primary: 15 52% 46%;
+    --primary-foreground: 48 33% 98%;
+    --destructive: 2 62% 48%;
+    --success: 120 60% 22%;
+    --warning: 38 92% 30%;
+    --ring: 15 52% 46%;
+    --sidebar: 48 24% 94%;
+    --radius: 0.75rem;
+
+    /* data-viz tokens (validated categorical order; see README) */
+    --series-1: #2a78d6;
+    --series-2: #eb6834;
+    --series-3: #1baf7a;
+    --series-4: #eda100;
+    --series-5: #e87ba4;
+    --series-6: #008300;
+    --series-7: #4a3aa7;
+    --series-8: #e34948;
+    --viz-surface: #fcfcfb;
+    --viz-ink: #0b0b0b;
+    --viz-ink-2: #52514e;
+    --viz-muted: #898781;
+    --viz-grid: #e1e0d9;
+    --viz-axis: #c3c2b7;
+    --div-mid: #f0efec;
+    --div-pos: #2a78d6;
+    --div-neg: #e34948;
+    color-scheme: light;
+  }
+  .dark {
+    --background: 40 3% 15%;
+    --foreground: 45 20% 92%;
+    --card: 40 3% 18%;
+    --card-foreground: 45 20% 92%;
+    --muted: 40 3% 21%;
+    --muted-foreground: 40 8% 64%;
+    --accent: 40 3% 24%;
+    --accent-foreground: 45 20% 92%;
+    --secondary: 40 3% 22%;
+    --secondary-foreground: 45 20% 92%;
+    --border: 40 3% 27%;
+    --primary: 15 58% 58%;
+    --primary-foreground: 40 3% 10%;
+    --destructive: 2 70% 62%;
+    --success: 120 60% 50%;
+    --warning: 38 90% 60%;
+    --ring: 15 58% 58%;
+    --sidebar: 40 3% 12%;
+
+    --series-1: #3987e5;
+    --series-2: #d95926;
+    --series-3: #199e70;
+    --series-4: #c98500;
+    --series-5: #d55181;
+    --series-6: #008300;
+    --series-7: #9085e9;
+    --series-8: #e66767;
+    --viz-surface: #1a1a19;
+    --viz-ink: #ffffff;
+    --viz-ink-2: #c3c2b7;
+    --viz-muted: #898781;
+    --viz-grid: #2c2c2a;
+    --viz-axis: #383835;
+    --div-mid: #383835;
+    --div-pos: #3987e5;
+    --div-neg: #e66767;
+    color-scheme: dark;
+  }
+  * {
+    @apply border-border;
+  }
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-feature-settings: "cv11", "ss01";
+  }
+  h1, h2, h3 {
+    @apply font-serif tracking-tight;
+  }
+  ::selection {
+    background: hsl(var(--primary) / 0.25);
+  }
+  :focus-visible {
+    @apply outline-none ring-2 ring-ring ring-offset-2 ring-offset-background;
+  }
+}
+
+@layer components {
+  .prose-chat p + p {
+    @apply mt-3;
+  }
+  .scroll-thin {
+    scrollbar-width: thin;
+    scrollbar-color: hsl(var(--border)) transparent;
+  }
+  .shimmer-text {
+    background: linear-gradient(90deg, hsl(var(--muted-foreground)) 30%, hsl(var(--foreground)) 50%, hsl(var(--muted-foreground)) 70%);
+    background-size: 200% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    @apply animate-shimmer;
+  }
+  .code-block {
+    @apply rounded-md border bg-[hsl(var(--muted)/0.6)] font-mono text-[12.5px] leading-relaxed;
+  }
+}
+
+/* Quiz protection: no selection/copy/print while the arena is open. This is a deterrent, not DRM. */
+.quiz-protected,
+.quiz-protected * {
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
+}
+.quiz-hidden .quiz-content {
+  filter: blur(18px);
+  pointer-events: none;
+}
+@media print {
+  .quiz-protected {
+    display: none !important;
+  }
+  .no-print {
+    display: none !important;
+  }
+  body {
+    background: white !important;
+    color: black !important;
+  }
+  .print-page {
+    max-width: none !important;
+    padding: 0 !important;
+  }
+  .print-break {
+    break-inside: avoid;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
